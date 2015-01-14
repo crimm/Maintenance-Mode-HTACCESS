@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+## Your incoming IP address should go here. If you don't know what your external IP is, go to: whatsmyip.net. Make sure to separate your dots with \. e.g. 1\.1\.1\.1
+RewriteCond %{REMOTE_ADDR} !^111\.222\.333\.444$
+
+## Anything not matching the IP address above will go to this page, so we want to make an exception.
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+
+## Send them to your maintenance page, use 302 to make sure to tell browsers and search engines that it's temporary
+RewriteRule ^(.*)$ /maintenance.html [R=302,L]
